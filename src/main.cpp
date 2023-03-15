@@ -16,8 +16,9 @@ POINT getCursorPosition()
 std::shared_ptr<Gdiplus::Bitmap> getBitmap(const std::string& filename)
 {
 	std::wstring wfilename = std::wstring(filename.begin(), filename.end());
-	auto bitmap = std::make_shared<Gdiplus::Bitmap>(wfilename);
-	return bitmap;
+	Gdiplus::Bitmap* bitmapPtr = new Gdiplus::Bitmap(wfilename.c_str());
+	std::shared_ptr<Gdiplus::Bitmap> bitmapSmartptr(bitmapPtr);
+	return bitmapSmartptr;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
