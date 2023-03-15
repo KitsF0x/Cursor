@@ -14,14 +14,15 @@ POINT getCursorPosition()
 	return cursorPos;
 }
 
-std::shared_ptr<Gdiplus::Bitmap> getBitmap(const std::string& filename)
+std::shared_ptr<Gdiplus::Image> getImage(const std::string& filename)
 {
 	std::wstring wfilename = std::wstring(filename.begin(), filename.end());
-	Gdiplus::Bitmap* bitmapPtr = new Gdiplus::Bitmap(wfilename.c_str());
-	std::shared_ptr<Gdiplus::Bitmap> bitmapSmartptr(bitmapPtr);
-	return bitmapSmartptr;
+	Gdiplus::Image* imagePtr = new Gdiplus::Image(wfilename.c_str());
+	std::shared_ptr<Gdiplus::Image> imageSmartPtr(imagePtr);
+	return imageSmartPtr;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+
 }
