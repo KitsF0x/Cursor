@@ -24,5 +24,15 @@ std::shared_ptr<Gdiplus::Image> getImage(const std::string& filename)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	Gdiplus::GdiplusStartupInput input;
+	ULONG_PTR token;
+	Gdiplus::GdiplusStartup(&token, &input, nullptr);
 
+	HDC hdc = GetDC(nullptr);
+	Gdiplus::Graphics graphics(hdc);
+
+	graphics.DrawImage(getImage("./image.bmp").get(), 0, 0);
+
+	ReleaseDC(nullptr, hdc);
+	Gdiplus::GdiplusShutdown(token);
 }
