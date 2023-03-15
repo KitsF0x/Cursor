@@ -10,12 +10,7 @@ POINT getCursorPosition()
 	return cursorPos;
 }
 
-int main()
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	POINT cursorPos;
-	while (true)
-	{
-		cursorPos = getCursorPosition();
-		std::cout << "X: " << cursorPos.x << "Y: " << cursorPos.y << std::endl;
-	}
+
 }

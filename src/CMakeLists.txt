@@ -1,1 +1,1 @@
-add_executable(cursor "main.cpp")
+add_executable(cursor WIN32 "main.cpp")
