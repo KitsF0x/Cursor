@@ -26,6 +26,19 @@ std::shared_ptr<Gdiplus::Image> getImage(const std::string& filename)
 	return imageSmartPtr;
 }
 
+void renderImageAtCursorPosition(Gdiplus::Graphics& graphics, Gdiplus::Image* image)
+{
+	while (true)
+	{
+		POINT p = getCursorPosition();
+		graphics.DrawImage(image, static_cast<INT>(p.x), static_cast<INT>(p.y));
+		if (GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_ESCAPE))
+		{
+			exit(0);
+		}
+	}
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	Gdiplus::GdiplusStartupInput input;
@@ -35,17 +48,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	HDC hdc = GetDC(nullptr);
 	Gdiplus::Graphics graphics(hdc);
 
-	const auto bitmap = getImage("./image.bmp");
+	const auto image = getImage("./image.bmp");
 
 	while (true)
 	{
-		POINT p = getCursorPosition();
-		graphics.DrawImage(bitmap.get(), static_cast<INT>(p.x), static_cast<INT>(p.y));
-		if (GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_ESCAPE))
-		{
-			exit(0);
-		}
+		renderImageAtCursorPosition(graphics, image.get());
 	}
+
 	ReleaseDC(nullptr, hdc);
 	Gdiplus::GdiplusShutdown(token);
 }
