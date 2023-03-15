@@ -30,7 +30,8 @@ void renderImageAtCursorPosition(Gdiplus::Graphics& graphics, Gdiplus::Image* im
 	while (true)
 	{
 		POINT p = getCursorPosition();
-		graphics.DrawImage(image, static_cast<INT>(p.x), static_cast<INT>(p.y));
+
+		graphics.DrawImage(image, static_cast<INT>(p.x - image->GetWidth() / 2), static_cast<INT>(p.y - image->GetHeight() / 2));
 		if (GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_ESCAPE))
 		{
 			exit(0);
