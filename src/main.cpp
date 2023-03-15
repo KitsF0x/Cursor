@@ -1,6 +1,5 @@
-#include <iostream>
 #include <Windows.h>
-#include <sstream>
+#include <string>
 #include <gdiplus.h>
 #include <Gdiplusheaders.h>
 #include <memory>
