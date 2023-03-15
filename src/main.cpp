@@ -18,6 +18,10 @@ std::shared_ptr<Gdiplus::Image> getImage(const std::string& filename)
 {
 	std::wstring wfilename = std::wstring(filename.begin(), filename.end());
 	Gdiplus::Image* imagePtr = new Gdiplus::Image(wfilename.c_str());
+	if (imagePtr->GetLastStatus() != Gdiplus::Ok)
+	{
+		MessageBox(NULL, "Cannot load image", "", MB_OK | MB_ICONHAND);
+	}
 	std::shared_ptr<Gdiplus::Image> imageSmartPtr(imagePtr);
 	return imageSmartPtr;
 }
@@ -37,6 +41,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		POINT p = getCursorPosition();
 		graphics.DrawImage(bitmap.get(), static_cast<INT>(p.x), static_cast<INT>(p.y));
+		if (GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_ESCAPE))
+		{
+			exit(0);
+		}
 	}
 	ReleaseDC(nullptr, hdc);
 	Gdiplus::GdiplusShutdown(token);
