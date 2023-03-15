@@ -31,8 +31,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	HDC hdc = GetDC(nullptr);
 	Gdiplus::Graphics graphics(hdc);
 
-	graphics.DrawImage(getImage("./image.bmp").get(), 0, 0);
+	const auto bitmap = getImage("./image.bmp");
 
+	while (true)
+	{
+		POINT p = getCursorPosition();
+		graphics.DrawImage(bitmap.get(), static_cast<INT>(p.x), static_cast<INT>(p.y));
+	}
 	ReleaseDC(nullptr, hdc);
 	Gdiplus::GdiplusShutdown(token);
 }
