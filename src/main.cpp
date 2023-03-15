@@ -5,6 +5,7 @@
 #include <Gdiplusheaders.h>
 #include <memory>
 
+#pragma comment(lib, "gdiplus.lib")
 
 POINT getCursorPosition()
 {
